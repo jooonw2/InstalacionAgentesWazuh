@@ -1,0 +1,24 @@
+- name: Instalar y configurar Wazuh Agente
+  hosts: all
+  become: yes
+  vars:
+    ansible_ssh_pass: "{{ lookup('env', 'password') }}"
+  tasks: 
+    - name: Descargar el paquete
+      shell: wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.7.3-1_amd64.deb -O /tmp/wazuh-agent.deb
+      args:
+        chdir: /tmp
+      ignore_errors: yes
+    - name: Instalar el agente
+      command: dpkg -i /tmp/wazuh-agent.deb
+      environment: 
+        WAZUH_MANAGER: "192.168.50.11"
+        WAZUH_AGENT_GROUP: "Linux"
+    - name: Recargar el daemon de systemctl
+      systemd:
+        daemon_reload: yes
+    - name: Habilitar el servicio del agente
+      service:
+        name: wazuh-agent
+        enabled: yes
+        state: started 
