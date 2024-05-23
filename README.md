@@ -4,17 +4,16 @@ Este repositorio contiene scripts diseñados para automatizar la implementación
 
 ## Contenido del Repositorio
 
-- **InstAgentWin.bat**: Script por lotes para la instalación del agente Wazuh en sistemas Windows.
-- **InstAgentLx.sh**: Script de shell para la configuración inicial de Ansible y la implementación del agente Wazuh en sistemas Ubuntu.
-- **instalar.yml**: Playbook de Ansible necesario para la instalación del agente Wazuh en sistemas Ubuntu. Este archivo debe estar ubicado en la carpeta de Ansible.
+- **InstAgentWin.bat**: Script para la instalación del agente Wazuh en sistemas Windows. Se deberá ejecutar en la maquina Windows donde se quiera instalar.
+- **InstAgentLx.sh**: Script de shell para la instalacion del agente Wazuh en sistemas Ubuntu. Se deberá ejecutar en el servidor donde se encuentre Wazuh Server. No necesitaremos tener acceso al cliente donde se quiere instalar.
+- **instalar.yml**: Playbook de Ansible necesario para la instalación del agente Wazuh en sistemas Ubuntu. Este archivo debe estar ubicado en la carpeta de Ansible del servidor.
 
 ## Instrucciones de Uso
 
 ### Instalación en Windows
 
 1. Clone este repositorio en la máquina Windows donde desea instalar el cliente Wazuh.
-2. Navegue hasta el directorio del repositorio clonado.
-3. Ejecute el archivo `InstAgentWin.bat` haciendo doble clic en él o desde una ventana de comandos con privilegios de administrador:
+2. Ejecute el archivo `InstAgentWin.bat` haciendo doble clic en él o desde una ventana de comandos con privilegios de administrador:
 
     ```sh
     InstAgentWin.bat
@@ -24,31 +23,43 @@ Este repositorio contiene scripts diseñados para automatizar la implementación
 
 ### Instalación en Ubuntu
 
-1. Clone este repositorio en la máquina Ubuntu donde desea instalar el cliente Wazuh.
+1. Clone este repositorio en el servidor donde se encuentre Wazuh server.
 2. Asegúrese de tener Ansible instalado y configurado en su sistema.
 3. Navegue hasta el directorio del repositorio clonado.
-4. Ejecute el script `InstAgentLx.sh` para configurar Ansible e iniciar el proceso de instalación del agente Wazuh:
+4. Ejecute el script `InstAgentLx.sh` para iniciar el proceso de instalación del agente Wazuh. Le pedira usuario, contraseña e IP de la maquina donde quiere instalar el wazuh agente.
 
     ```sh
     sudo bash InstAgentLx.sh
     ```
 
-5. El script `InstAgentLx.sh` ejecutará el playbook `instalar.yml`, que realizará la instalación del agente Wazuh en su sistema Ubuntu.
+6. El script `InstAgentLx.sh` ejecutará el playbook `instalar.yml`, que realizará remotamente la instalación del agente Wazuh en su sistema Ubuntu.
 
 ## Requisitos Previos
 
 - **Windows**: No se requieren configuraciones previas especiales.
-- **Ubuntu**:
+- **Ubuntu**(Todo en el servidor, en el cliente donde queremos tener instalar wazuh no se requieren configuraciones previas.):
   - Debemos tener instalado expect
-       ```sh
+    ```sh
     sudo apt-get update
     sudo apt-get install expect
     ```
-  - Ansible debe estar instalado. Puede instalar Ansible ejecutando:
+  - Ansible debe estar instalado y configurado. Puede instalar Ansible y configurarlo ejecutando:
     ```sh
+    sudo apt-add-repository ppa:ansible/ansible
     sudo apt-get install ansible
+    sudo apt install python3-argcomplete
+    sudo activate-global-python-argcomplete3
     ```
-
+  - Deberemos configurar tambien las claves ssh del servidor:
+    ```sh
+    ssh-keygen -t rsa -b 4096 -C "Ansible Key"
+    ```
+  - Debemos añadir un usuario al servidor y configurarlo para que se pueda ejecutar sin contraseña:
+    ```sh
+    sudo adduser ansible
+    echo "ansible ALL=(ALL) NOPASSWD" | sudo tee /etc/sudoers.d/ansible
+    sudo usermod -L ansible
+    ```
 ## Notas Adicionales
 
 - Asegúrese de que el firewall y las políticas de seguridad en su sistema permitan la instalación y el funcionamiento del agente Wazuh.
@@ -57,7 +68,3 @@ Este repositorio contiene scripts diseñados para automatizar la implementación
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Si encuentra algún problema o tiene alguna mejora, por favor, abra un issue o envíe un pull request.
-
-## Licencia
-
-Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
