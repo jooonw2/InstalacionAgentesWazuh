@@ -1,6 +1,6 @@
 # Scripts de Automatización para la Implementación de Clientes Wazuh
 
-Este repositorio contiene scripts diseñados para automatizar la implementación de los clientes de Wazuh en sistemas operativos Windows y Linux (Ubuntu). A continuación, se detalla el uso y funcionamiento de cada uno de los archivos incluidos.
+Este repositorio contiene scripts diseñados para automatizar la implementación de los clientes de Wazuh en sistemas operativos Windows y Linux (remotamente). A continuación, se detalla el uso y funcionamiento de cada uno de los archivos incluidos.
 
 ## Contenido del Repositorio
 
