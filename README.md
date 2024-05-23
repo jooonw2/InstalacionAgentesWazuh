@@ -39,10 +39,13 @@ Este repositorio contiene scripts diseñados para automatizar la implementación
 
 - **Windows**: No se requieren configuraciones previas especiales.
 - **Ubuntu**:
-  - Ansible debe estar instalado. Puede instalar Ansible ejecutando:
-
-    ```sh
+  - Debemos tener instalado expect
+       ```sh
     sudo apt-get update
+    sudo apt-get install expect
+    ```
+  - Ansible debe estar instalado. Puede instalar Ansible ejecutando:
+    ```sh
     sudo apt-get install ansible
     ```
 
