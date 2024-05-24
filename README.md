@@ -1,7 +1,7 @@
-# Scripts de Automatización para la Implementación de Clientes Wazuh
+ # Scripts de Automatización para la Implementación de Clientes Wazuh
 
 Este repositorio contiene scripts diseñados para automatizar la implementación de los clientes de Wazuh en sistemas operativos Windows y Linux (remotamente). A continuación, se detalla el uso y funcionamiento de cada uno de los archivos incluidos.
-En los dos scripts debera expecificar la IP donde se encuentre instalado el servidor wazuh.
+En los dos scripts se debera expecificar la IP donde se encuentre instalado el servidor wazuh.
 
 ## Contenido del Repositorio
 
@@ -21,12 +21,13 @@ En los dos scripts debera expecificar la IP donde se encuentre instalado el serv
     ```
 
    Este script descargará e instalará automáticamente el agente Wazuh en su sistema Windows.
+   Si lo queremos verificar podemos ver si se nos ha añadido y arrancado el servicio wazuh.
 
 ### Instalación en Ubuntu
 
 1. Clone este repositorio en el servidor donde se encuentre Wazuh server.
 2. Asegúrese de tener Ansible instalado y configurado en su sistema.
-3. Navegue hasta el directorio del repositorio clonado.
+3. Navegue hasta el directorio del repositorio clonado. Guarda el paylook(instalar.yml) en la carpeta de ansible.
 4. Ejecute el script `InstAgentLx.sh` para iniciar el proceso de instalación del agente Wazuh. Le pedira usuario, contraseña e IP de la maquina donde quiere instalar el wazuh agente.
 
     ```sh
