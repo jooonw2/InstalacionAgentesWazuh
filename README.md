@@ -39,7 +39,7 @@ En los dos scripts se debera expecificar la IP donde se encuentre instalado el s
 ## Requisitos Previos
 
 - **Windows**: No se requieren configuraciones previas especiales.
-- **Ubuntu**(Todo en el servidor, en el cliente donde queremos tener instalar wazuh no se requieren configuraciones previas.):
+- **Ubuntu**(Todo en el servidor, en el cliente donde queremos tener instalar wazuh no se requieren configuraciones previas):
   - Debemos tener instalado expect
     ```sh
     sudo apt-get update
