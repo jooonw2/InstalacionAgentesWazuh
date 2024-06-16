@@ -1,6 +1,5 @@
 #!/usr/bin/expect -f
 
-# Configuración del tiempo de espera
 set timeout -1
 
 # Leer nombre de usuario
@@ -47,7 +46,7 @@ expect {
             set env(password) $password
             puts "Contraseña exportada como variable de entorno"
 
-            # Conectar mediante SSH y ejecutar los comandos adicionales
+            # Conectar mediante SSH y ejecutar los comandos
             set command "sudo sed -i 's/#\?PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config && sudo systemctl restart sshd"
             spawn ssh $user@$ip $command
             expect {
