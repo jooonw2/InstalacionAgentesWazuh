@@ -2,7 +2,7 @@
 :: Solicita permisos de administrador
 NET SESSION >NUL 2>NUL
 if %errorlevel% neq 0 (
-    echo Requesting administrative privileges ...
+    echo Se requieren permisos de administrador ...
     powershell.exe -Command "Start-Process -FilePath '%comspec%' -ArgumentList '/c \"%~s0\"' -Verb RunAs"
     exit /B
 )
@@ -13,7 +13,7 @@ powershell.exe -Command "Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/w
 :: Espera 10 segundos para que la instalación del agente se complete
 timeout /t 10
 
-:: Si la instalación fue exitosa, iniciar el servicio
+:: Iniciar el servicio
 if %errorlevel% equ 0 (
     NET START WazuhSvc
 ) else (
